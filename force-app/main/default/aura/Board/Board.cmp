@@ -1,4 +1,5 @@
 <aura:component implements="flexipage:availableForAllPageTypes">
+    <!-- ATRIBUTES -->
     <aura:attribute name="words" type="List" />
     <aura:attribute name="winWord" type="String" />
     <aura:attribute name="clickCount" type="Integer" default="0" />
@@ -6,10 +7,10 @@
     <aura:attribute name="mode" type="String" default="hard" />
     <aura:attribute name="result" type="String" />
     <aura:attribute name="boardDisabled" type="Boolean" default="false" />
-
+    <!-- EVENTS -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <aura:handler name="onclick" event="c:BlockClickEvent" action="{!c.blockClickHandler}" />
-
+    <!-- METHODS -->
     <aura:method name="startGame" action="{!c.doInit}" description="Start new game">
 
     </aura:method>
