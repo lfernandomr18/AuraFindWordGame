@@ -10,5 +10,9 @@
             compEvent.fire();
         }
 
+    },
+    scriptsLoaded: function (component, event, helper) {
+        const divElement = component.getElement(".board-bloc");
+        fitText(divElement);
     }
 })
