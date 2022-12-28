@@ -15,11 +15,20 @@
         }
         //seteo inicial de words,winWord y blocksize de acuerdo a gameMode
         let blockSize = 12 / column;
-        const words = helper.getWords(column * column);
+        let words = helper.getWords(column * column);
+        let previuswords = component.get("v.words");
+        if (previuswords.length > 0) {
+            words = helper.validatePreviusWords(words, previuswords, helper, column);
+        }
+
+
         const winword = helper.getWinWord(words);
         component.set("v.words", words);
         component.set("v.winWord", winword);
         component.set("v.blockSize", blockSize);
+
+        //reset the board
+        helper.resetBoard(component);
     },
     blockClickHandler: function (component, event, helper) {
         //contador de clicks 
@@ -35,5 +44,6 @@
             helper.disableBoard(component);
         }
         component.set("v.clickCount", clickCount);
-    },
+    }
+
 })

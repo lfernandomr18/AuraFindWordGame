@@ -1,5 +1,5 @@
 ({
-    getWords: function (count) {
+    getWords: function (count, repetidas) {
         if (count > 100) return;
         let wordsArray = [
             "expansion",
@@ -103,9 +103,20 @@
             "sidewalk",
             "reply"
         ];
+        if (repetidas) {
+            let salida = wordsArray.filter(checkwords);
+
+            function checkwords(word) {
+                return !(repetidas.includes(word));
+            }
+
+            wordsArray = salida;
+        }
+
         wordsArray = this.randomizeArray(wordsArray);
         return wordsArray.slice(0, count);
     },
+
     randomizeArray: function (array) {
         let currentIndex = array.length, randomIndex;
         // While there remain elements to shuffle.
@@ -132,6 +143,19 @@
         component.set("v.boardDisabled", false);
     },
     resetBoard: function (component, event, helper) {
-
+        this.enableBoard(component);
+        component.set("v.clickCount", 0);
+        //reset the result
+        component.set("v.result", "");
+    },
+    validatePreviusWords: function (words, previuswords, helper, column) {
+        let repetidas = [];
+        for (let index = 0; index < previuswords.length; index++) {
+            if (words.includes(previuswords[index])) {
+                repetidas.push(previuswords[index]);
+            }
+        }
+        words = helper.getWords(column * column, repetidas);
+        return words;
     }
 })
