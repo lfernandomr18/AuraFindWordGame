@@ -15,6 +15,18 @@
 
     },
     reshuffleBoard: function (component, event, helper) {
+        const boardComp = component.find("boardComp");
+        boardComp.reshufleBoard();
+        component.set("v.reshufleDisabled", true);
 
+    },
+    onResultHandler: function (component, event, helper) {
+        const result = event.getParam("result");
+        if (result === "win") {
+            component.set("v.reshufleDisabled", true);
+        }
+        else {
+            component.set("v.reshufleDisabled", false);
+        }
     }
 })

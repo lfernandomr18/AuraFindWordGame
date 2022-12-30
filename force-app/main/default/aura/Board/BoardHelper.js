@@ -110,7 +110,11 @@
             }
         }
         wordsArray = this.randomizeArray(wordsArray);
-        return wordsArray.slice(0, count);
+        //open false property
+        const wordObjArray = wordsArray.map(element => {
+            return { word: element, open: false };
+        })
+        return wordObjArray.slice(0, count);
     },
     randomizeArray: function (array) {
         let currentIndex = array.length, randomIndex;
@@ -129,7 +133,7 @@
     },
     getWinWord: function (arr) {
         const randomIndex = Math.floor(Math.random() * arr.length);
-        return arr[randomIndex];
+        return arr[randomIndex].word;
     },
     disableBoard: function (component) {
         component.set("v.boardDisabled", true);
@@ -142,5 +146,10 @@
         component.set("v.clickCount", 0);
         //reset the result
         component.set("v.result", "");
+    },
+    fireResultEvent: function (resultValue) {
+        const appevent = $A.get("e.c:ResultApplicationEvent");
+        appevent.setParams({ result: resultValue });
+        appevent.fire();
     }
 })

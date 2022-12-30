@@ -1,10 +1,14 @@
 <aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <!-- ATRIBUTES -->
     <aura:attribute name="modes" type="List" default="[
     {'label': 'Easy', 'value': 'easy'},
     {'label': 'Medium', 'value': 'medium'},
     {'label': 'Hard', 'value': 'hard'},
     ]" />
     <aura:attribute name="selectedMode" type="String" />
+    <aura:attribute name="reshufleDisabled" type="Boolean" default="true" />
+    <!-- EVENTS -->
+    <aura:handler event="c:ResultApplicationEvent" action="{!c.onResultHandler}" />
     <lightning:card title="Word Shuffle">
         <lightning:layout horizontalAlign="center" multipleRows="true">
             <lightning:layoutItem padding="around-small">
@@ -17,7 +21,7 @@
             </lightning:layoutItem>
             <lightning:layoutItem padding="around-small">
                 <lightning:button aura:id="reshuffleBttn" label="Reshuffle" title="Reshuffle"
-                    onclick="{!c.reshuffleBoard}" />
+                    disabled="{!v.reshufleDisabled}" onclick="{!c.reshuffleBoard}" />
             </lightning:layoutItem>
             <lightning:layoutItem size="12">
                 <aura:if isTrue="{! (v.selectedMode) != null}">
