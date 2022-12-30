@@ -24,9 +24,12 @@
         const result = event.getParam("result");
         if (result === "win") {
             component.set("v.reshufleDisabled", true);
+            helper.showToast("YOU WIN", "BUENA CAPOOO", "success");
         }
         else {
             component.set("v.reshufleDisabled", false);
+            helper.showToast("YOU LOSE", "Reshuflea el board to keep playing", "error")
         }
+        helper.addResultRecord(component, result);
     }
 })
